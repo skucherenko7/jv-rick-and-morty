@@ -5,9 +5,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface CharacterService {
-    CharacterDto getRandom();
+    CharacterDto getRandomChar();
 
-    Page<CharacterDto> findByName(String name, Pageable pageable);
+    Page<CharacterDto> findCharByName(String name, Pageable pageable);
 
     void initializeDatabase();
 }

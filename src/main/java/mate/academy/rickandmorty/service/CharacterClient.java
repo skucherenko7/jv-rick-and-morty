@@ -5,4 +5,6 @@ import mate.academy.rickandmorty.dto.external.CharacterResponseDataDto;
 
 public interface CharacterClient {
     List<CharacterResponseDataDto> initializeDatabase();
+
+    Long getTotalCharactersCount();
 }

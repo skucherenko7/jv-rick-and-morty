@@ -16,18 +16,13 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class CharacterServiceImpl implements CharacterService {
-    private static final long TOTAL_CHARS = 826;
-
     private final CharacterClient client;
-
     private final CharacterMapper mapper;
-
     private final CharacterRepository repository;
-
     private final Random random = new Random();
 
     @Override
-    public Page<CharacterDto> findByName(String name, Pageable pageable) {
+    public Page<CharacterDto> findCharByName(String name, Pageable pageable) {
         return repository.findByNameContainingIgnoreCase(name, pageable).map(mapper::toDto);
     }
 
@@ -41,8 +36,9 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public CharacterDto getRandom() {
-        Long id = random.nextLong(TOTAL_CHARS) + 1;
+    public CharacterDto getRandomChar() {
+        Long totalChars = client.getTotalCharactersCount();
+        Long id = random.nextLong(totalChars) + 1;
         Character byId = repository
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(

@@ -25,7 +25,7 @@ public class CharactersController {
             description = "Retrieves a random character from the universe")
     @GetMapping("char/random")
     public CharacterDto getRandomChar() {
-        return service.getRandom();
+        return service.getRandomChar();
     }
 
     @Operation(summary = "Get character by name",
@@ -33,6 +33,6 @@ public class CharactersController {
                     + " with sorting and pagination")
     @GetMapping("char/by-name")
     public Page<CharacterDto> findCharByName(@RequestParam String name, Pageable pageable) {
-        return service.findByName(name, pageable);
+        return service.findCharByName(name, pageable);
     }
 }
